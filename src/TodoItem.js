@@ -9,11 +9,6 @@ export default function TodoItem({ id, editing, task, complete, onToggleComplete
         }
     });
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        onEndEditing(id, val);
-    }  
-
     return (
         <li className={`${complete ? 'completed' : ''} ${editing ? 'editing' : ''}`}>
             <div className="view">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { visibilityAction, clearCompleteAction } from './store/actionCreators';
+import { clearCompleteAction } from './store/actionCreators';
 import { NavLink } from 'react-router-dom';
 
 function Summary({ completed, remaining, clearComplete }) {
