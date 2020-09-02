@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { visibilityAction, clearCompleteAction } from './store/actionCreators';
+import { NavLink } from 'react-router-dom';
 
-function Summary({ completed, remaining, visibility, setVisibility, clearComplete }) {
+function Summary({ completed, remaining, clearComplete }) {
     return (
         <footer className="footer">
             <span className="todo-count">{remaining} Item{remaining !== 1 ? 's' : ''} left</span>
-            <ul className="filters">
-                <li onClick={() => setVisibility("All")} className={visibility === "All" ? "active" : ""} href="#"><a>All</a></li>
-                <span />
-                <li onClick={() => setVisibility("Active")} className={visibility === "Active" ? "active" : ""} href="#"><a>Active</a></li>
-                <span />
-                <li onClick={() => setVisibility("Completed")} className={visibility === "Completed" ? "active" : ""} href="#"><a>Completed</a></li>
-            </ul>            
+            <div className="filters">
+                <li><NavLink exact to="/" activeClassName="selected">All</NavLink></li>
+                <li><NavLink exact to="/active" activeClassName="selected">Active</NavLink></li>
+                <li><NavLink exact to="/completed" activeClassName="selected">Completed</NavLink></li>
+            </div>
             <button className={`${!completed ? "hidden" : ""} clear-completed`} onClick={clearComplete}>Clear completed</button>                        
         </footer>
     );
@@ -22,14 +21,12 @@ function mapStateToProps(state) {
     const rem = state.todos.filter(todo => !todo.complete).length;
     return {
         remaining: rem,
-        completed: state.todos.length - rem,
-        visibility: state.visibility
+        completed: state.todos.length - rem
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        setVisibility: v => dispatch(visibilityAction(v)),
         clearComplete: () => dispatch(clearCompleteAction())
     }
 }

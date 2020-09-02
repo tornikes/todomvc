@@ -1,4 +1,4 @@
-import { CREATED_NEW_TODO, TODO_COMPLETION_TOGGLED, TODO_REMOVED, VISIBILITY_ACTIVE, VISIBILITY_ALL, VISIBILITY_COMPLETED, CLEAR_COMPLETED, TOGGLE_ALL, START_EDITING, END_EDITING } from './ActionTypes';
+import { CREATED_NEW_TODO, TODO_COMPLETION_TOGGLED, TODO_REMOVED, CLEAR_COMPLETED, TOGGLE_ALL, START_EDITING, END_EDITING } from './ActionTypes';
 
 export function todoCreatedAction(text) {
     return {
@@ -24,21 +24,6 @@ export function removeTodoAction(id) {
 export function toggleAll() {
     return {
         type: TOGGLE_ALL
-    }
-}
-
-export function visibilityAction(visibilty) {
-    let vis;
-    if(visibilty === "Completed") {
-        vis = VISIBILITY_COMPLETED;
-    } else if(visibilty === "Active") {
-        vis = VISIBILITY_ACTIVE;
-    } else {
-        vis = VISIBILITY_ALL;
-    }
-
-    return {
-        type: vis
     }
 }
 

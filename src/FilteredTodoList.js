@@ -3,11 +3,13 @@ import TodoList from './TodoList';
 import { connect } from 'react-redux';
 import { toggleCompleteAction, removeTodoAction, startEditingTodo, endEditing, toggleAll } from './store/actionCreators';
 
-function FilteredTodoList({ visibilityFilter, todos, toggleComplete, removeTodo, onStartEditing, onEndEditing, onToggleAll }) {
+function FilteredTodoList({ todos, toggleComplete, removeTodo, onStartEditing, onEndEditing, onToggleAll, match }) {
+
     const toShow = 
-        visibilityFilter === "Completed" ? todos.filter(todo => todo.complete) 
-                        : visibilityFilter === "Active" ? todos.filter(todo => !todo.complete)
+        match.url === "/completed" ? todos.filter(todo => todo.complete) 
+                        : match.url === "/active" ? todos.filter(todo => !todo.complete)
                         : todos;
+
     return (
         <TodoList 
             todos={toShow}
@@ -22,8 +24,7 @@ function FilteredTodoList({ visibilityFilter, todos, toggleComplete, removeTodo,
 
 function mapStateToProps(state) {
     return {
-        todos: state.todos,
-        visibilityFilter: state.visibility
+        todos: state.todos
     };
 }
 
